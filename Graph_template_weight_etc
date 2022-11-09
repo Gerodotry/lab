@@ -1,0 +1,143 @@
+
+#include <vector>
+#include <list>
+#include <queue>
+using namespace std;
+
+template <class T> class Edge;
+template <class T> class Graph;
+template <class T>
+class Vertex {
+  T info;
+	vector<Edge<T>  > adj;
+	bool visited;
+	void addEdge(Vertex<T> *dest, double w);
+	bool removeEdgeTo(Vertex<T> *d);
+
+	//Fp09
+	int num;
+	int low;
+	Vertex<T>* path;
+
+public:
+	Vertex(T in);
+	Vertex(const Vertex<T> &v);
+	T getInfo() const;
+	int getNum() {return num;}
+	friend class Graph<T>;
+};
+
+template <class T>
+T Vertex<T>::getInfo() const {
+	return info;
+}
+template <class T>
+bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
+	typename vector<Edge<T> >::iterator it= adj.begin();
+	typename vector<Edge<T> >::iterator ite= adj.end();
+	while (it!=ite) {
+		if (it->dest == d) {
+			adj.erase(it);
+			return true;
+		}
+		else it++;
+	}
+	return false;
+}
+template <class T>
+Vertex<T>::Vertex(T in): info(in), visited(false), num(0), low(0), path(NULL){}
+template <class T>
+Vertex<T>::Vertex(const Vertex<T> & in): info(in.info), visited(in.visited), num(in.num), low(in.low), path(NULL){}
+template <class T>
+void Vertex<T>::addEdge(Vertex<T> *dest, double w) {
+	Edge<T> edgeD(dest,w);
+	adj.push_back(edgeD);
+}
+template <class T>
+class Edge {
+	Vertex<T> * dest;
+	double weight;
+	bool visited;
+public:
+	Edge(Vertex<T> *d, double w);
+	friend class Graph<T>;
+	friend class Vertex<T>;
+};
+template <class T>
+Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w), visited(false){}
+template <class T>
+class Graph {
+	vector<Vertex<T> *> vertexSet;
+	void dfs(Vertex<T> *v, vector<T> &res) const;
+	vector<T> pontosArt;
+	int counter;
+
+public:
+	bool addVertex(const T &in);
+	bool addEdge(const T &sourc, const T &dest, double w);
+	bool removeVertex(const T &in);
+	bool removeEdge(const T &sourc, const T &dest);
+};
+template <class T>
+bool Graph<T>::addVertex(const T &in) {
+	typename vector<Vertex<T>*>::iterator it= vertexSet.begin();
+	typename vector<Vertex<T>*>::iterator ite= vertexSet.end();
+	for (; it!=ite; it++)
+		if ((*it)->info == in) return false;
+	Vertex<T> *v1 = new Vertex<T>(in);
+	vertexSet.push_back(v1);
+	return true;
+}
+template <class T>
+bool Graph<T>::removeVertex(const T &in) {
+	typename vector<Vertex<T>*>::iterator it= vertexSet.begin();
+	typename vector<Vertex<T>*>::iterator ite= vertexSet.end();
+	for (; it!=ite; it++) {
+		if ((*it)->info == in) {
+			Vertex<T> * v= *it;
+			vertexSet.erase(it);
+			typename vector<Vertex<T>*>::iterator it1= vertexSet.begin();
+			typename vector<Vertex<T>*>::iterator it1e= vertexSet.end();
+			for (; it1!=it1e; it1++) {
+				(*it1)->removeEdgeTo(v);
+			}
+			delete v;
+			return true;
+		}
+	}
+	return false;
+}
+template <class T>
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+	typename vector<Vertex<T>*>::iterator it= vertexSet.begin();
+	typename vector<Vertex<T>*>::iterator ite= vertexSet.end();
+	int found=0;
+	Vertex<T> *edgeS, *edgeD;
+	while (found!=2 && it!=ite ) {
+		if ( (*it)->info == sourc )
+			{ edgeS=*it; found++;}
+		if ( (*it)->info == dest )
+			{ edgeD=*it; found++;}
+		it ++;
+	}
+	if (found!=2) return false;
+	edgeS->addEdge(edgeD,w);
+	return true;
+}
+template <class T>
+bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
+	typename vector<Vertex<T>*>::iterator it= vertexSet.begin();
+	typename vector<Vertex<T>*>::iterator ite= vertexSet.end();
+	int found=0;
+	Vertex<T> *edgeS, *edgeD;
+	while (found!=2 && it!=ite ) {
+		if ( (*it)->info == sourc )
+			{ edgeS=*it; found++;}
+		if ( (*it)->info == dest )
+			{ edgeD=*it; found++;}
+		it ++;
+	}
+	if (found!=2) return false;
+	return edgeS->removeEdgeTo(edgeD);
+}
+int main(){}
