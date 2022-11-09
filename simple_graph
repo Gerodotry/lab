@@ -1,0 +1,155 @@
+
+#include <cstring>
+#include <iostream>
+using namespace std;
+template <typename Vertex,typename Edge>
+class Graph {
+private:
+	Vertex n;
+	Vertex obj[10][10];
+public:
+	Graph(int x)
+	{
+		n = x;
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n; ++j) {
+				obj[i][j] = 0;
+			}
+		}
+	}
+	void display()
+	{
+		cout << "\nGraph:";
+
+		for (int i = 0; i < n; ++i) {
+			cout << "\n";
+			for (int j = 0; j < n; ++j) {
+				cout << " " << obj[i][j];
+			}
+		}
+	}
+
+	void addEdge(Edge x, Edge y, Edge a )
+	{
+
+		
+		if ((x >= n) || (y > n)) {
+			cout << "Vertex does not exists!";
+		}
+
+		if (x == y) {
+			cout << "Same Vertex!";
+		}
+		else {
+			
+			obj[y][x] = a;
+			obj[x][y] = a;
+		}
+	}
+
+	void addVertex()
+	{
+		n++;
+		int i;
+
+		for (i = 0; i < n; ++i) {
+			obj[i][n - 1] = 0;
+			obj[n - 1][i] = 0;
+		}
+	}
+
+	 void removeVertex(Vertex x)
+	{
+		if (x > n) {
+			cout << "\nnot present!";
+			return;
+		}
+		else {
+			int i;
+
+			while (x < n) {
+				for (i = 0; i < n; ++i) {
+					obj[i][x] = obj[i][x + 1];
+				}
+
+				for (i = 0; i < n; ++i) {
+					obj[x][i] = obj[x + 1][i];
+				}
+				x++;
+			}
+
+			n--;
+		}
+	}
+    
+    void removeEdge(Edge x, Edge y)
+    {
+        
+        if ((x < 0) || (x >= n)) {
+            cout << "Vertex" << x
+                 << " does not exist!";
+        }
+        if ((y < 0) || (y >= n)) {
+            cout << "Vertex" << y
+                 << " does not exist!";
+        }
+ 
+    
+        if (x == y) {
+            cout << "Same Vertex!";
+        }
+ 
+        else {
+            
+            obj[y][x] = 0;
+            obj[x][y] = 0;
+        }
+    }
+void MinSpanTree(){
+     int x;
+     int y;
+     int no_edge;  
+     int selected[5];
+  memset(selected, false, sizeof(selected));
+  no_edge = 0;
+  selected[0] = true;
+  cout <<"\n spanning  tree";
+cout << "\n Edge"<< " : "<< "Weight";
+  cout << endl;
+  while (no_edge <5) {
+    int min = 9999;
+    for (int i = 0; i < 5; i++)// 
+	 {
+      if (selected[i]) {
+        for (int j = 0; j < 5; j++) {
+          if (!selected[j] && obj[i][j]) { 
+            if (min > obj[i][j]) {
+              min = obj[i][j];
+              x = i;
+              y = j;
+            }
+          }
+        }
+      }
+    }
+    cout << x << " - " << y << " :  " << obj[x][y];
+    cout << endl;
+    selected[y] = true;
+    no_edge++;
+  }
+}
+};
+ 
+int main()
+{  
+	Graph obj(5); 
+
+	obj.addEdge(0, 1, 6 );
+	obj.addEdge(0, 2,9);
+	obj.addEdge(1, 2,97);
+	obj.addEdge(2, 3, 11);
+	obj.addEdge(3, 4, 12);
+	obj.addVertex();
+  obj.display();
+	obj.MinSpanTree();
+}
