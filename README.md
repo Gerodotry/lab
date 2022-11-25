@@ -27,12 +27,12 @@
   
    "second";
 # Set a Time Point
-  'Time t1( "year", "month","day","hour","minute","second"; )'
+  ```Time t1( "year", "month","day","hour","minute","second"; )```
   
 # Functions 
 
  ## <sub> Time Difference. Measure the time difference.</sub> 
-'long int Time:: dif(Time an){
+```long int Time:: dif(Time an){
     long int result = 0;
     long int a = CompToSec(an.year,an.month,an.day,an.hour,an.minute,an.second);
     long int c = CompToSec(year,month,day,hour,minute,second);
@@ -43,16 +43,16 @@
     result = c-a;
     }
     return result;
-}'
+}```
 ## <sub> Addition Time .  Adding time to choosen date .</sub> 
-'long int Time:: add(Time some ){
+```long int Time:: add(Time some ){
    long int a =  CompToSec( year, month, day, hour, minute , second);
    long int c = dif(some);
    c = a+c;
    c = some.decompress(c);
-  return c;'
+  return c;```
 ## <sub> number of Month and Year week.Count number of week that have already ended durind the year and the month</sub>  
-'void Time:: get_Year_and_Month_week(){
+```void Time:: get_Year_and_Month_week(){
     int findday=0;
   for(int i=1; i<month; i++)
     {
@@ -62,9 +62,9 @@
     year_week = month_week/7;
     int month_week = day/7;
     cout <<  year_week <<" "<< month_week ;
-}'
+}```
 ## <sub>  Week. Shows the day of week </sub> 
-'string Time :: Nweek(){
+```string Time :: Nweek(){
 long int temp=0;
 int b = 0;
 for(int i=1; i<month; i++)
@@ -100,4 +100,4 @@ switch (week%7)
         break;
     }
     return res;
-}'
+}```
