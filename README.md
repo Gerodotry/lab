@@ -31,7 +31,6 @@
   
 # Functions 
 
-  ## Time Difference
-## Measure the time difference.
+ ## <sub> Time Difference Measure the time difference.</sub> 
 
 
