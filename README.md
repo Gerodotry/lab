@@ -29,6 +29,8 @@
 # Set a Time Point
   ```Time t1( "year", "month","day","hour","minute","second"; )```
   
+  
+  
 # Functions 
 
  ## <sub> Time Difference. Measure the time difference.</sub> 
@@ -44,6 +46,8 @@
     }
     return result;
 }```
+
+
 ## <sub> Addition Time .  Adding time to choosen date .</sub> 
 ```long int Time:: add(Time some ){
    long int a =  CompToSec( year, month, day, hour, minute , second);
@@ -51,6 +55,8 @@
    c = a+c;
    c = some.decompress(c);
   return c;```
+  
+  
 ## <sub> number of Month and Year week.Count number of week that have already ended durind the year and the month</sub>  
 ```void Time:: get_Year_and_Month_week(){
     int findday=0;
@@ -63,6 +69,8 @@
     int month_week = day/7;
     cout <<  year_week <<" "<< month_week ;
 }```
+
+
 ## <sub>  Week. Shows the day of week </sub> 
 ```string Time :: Nweek(){
 long int temp=0;
