@@ -70,7 +70,8 @@
     year_week = month_week/7;
     int month_week = day/7;
     cout <<  year_week <<" "<< month_week ;
-}```
+}
+```
 
 
 ## <sub>  Week. Shows the day of week </sub> 
