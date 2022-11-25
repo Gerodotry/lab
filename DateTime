@@ -49,6 +49,7 @@ class Time
         string Nweek();
         long int dif(Time);  
         long int add(Time);
+        void get_Year_and_Month_week();
 }; 
 Time :: Time(int y, int m, int d,int h,int min,long int s)
 {
@@ -130,6 +131,17 @@ switch (week%7)
         break;
     }
     return res;
+}
+void Time:: get_Year_and_Month_week(){
+    int findday=0;
+  for(int i=1; i<month; i++)
+    {
+            findday=result+no_of_days_in_month(i,year);
+    }
+    int year_week = findday + day;
+    year_week = month_week/7;
+    int month_week = day/7;
+    cout <<  year_week <<" "<< month_week ;
 }
 int Time::decompress(long int sum){
   day = sum / ext;
