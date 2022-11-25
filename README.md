@@ -3,14 +3,18 @@
 
    "year"  
    
-  | "month"
+   "month"
   
-  | "week"
+   "week"
   
-  | "day"
+   "day"
   
-  | "hour"
+   "hour"
   
-  | "minute"
+   "minute"
   
-  | "second";
+   "second";
+# Set a Time Point
+  'Time t1( "year", "month","day","hour","minute","second"; )'
+  
+  
