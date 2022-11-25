@@ -1,5 +1,8 @@
 # Time Unit 
-hour 
-day
-month
-year
+  | "year"
+  | "month"
+  | "week"
+  | "day"
+  | "hour"
+  | "minute"
+  | "second";
