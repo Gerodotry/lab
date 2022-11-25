@@ -45,7 +45,8 @@
     result = c-a;
     }
     return result;
-}```
+}
+```
 
 
 ## <sub> Addition Time .  Adding time to choosen date .</sub> 
@@ -54,7 +55,8 @@
    long int c = dif(some);
    c = a+c;
    c = some.decompress(c);
-  return c;```
+  return c;
+  ```
   
   
 ## <sub> number of Month and Year week.Count number of week that have already ended durind the year and the month</sub>  
